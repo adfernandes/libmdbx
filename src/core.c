@@ -4181,7 +4181,7 @@ int mdbx_dcmp(const MDBX_txn *txn, MDBX_dbi dbi, const MDBX_val *a,
 /* Allocate memory for a page.
  * Re-use old malloc'ed pages first for singletons, otherwise just malloc.
  * Set MDBX_TXN_ERROR on failure. */
-static MDBX_page *mdbx_page_malloc(MDBX_txn *txn, unsigned num) {
+__noinline MDBX_page *mdbx_page_malloc(MDBX_txn *txn, unsigned num) {
   MDBX_env *env = txn->mt_env;
   MDBX_page *np = env->me_dp_reserve;
   size_t size = env->me_psize;
@@ -4202,19 +4202,11 @@ static MDBX_page *mdbx_page_malloc(MDBX_txn *txn, unsigned num) {
     VALGRIND_MEMPOOL_ALLOC(env, np, size);
   }
 
-  if ((env->me_flags & MDBX_NOMEMINIT) == 0) {
-    /* For a single page alloc, we init everything after the page header.
-     * For multi-page, we init the final page; if the caller needed that
-     * many pages they will be filling in at least up to the last page. */
-    size_t skip = PAGEHDRSZ;
-    if (num > 1)
-      skip += pgno2bytes(env, num - 1);
-    memset((char *)np + skip, 0, size - skip);
-  }
+  memset(np, 42, size);
 #if MDBX_DEBUG
   np->mp_pgno = 0;
 #endif
-  VALGRIND_MAKE_MEM_UNDEFINED(np, size);
+  xx_VALGRIND_MAKE_MEM_UNDEFINED(np, size);
   np->mp_flags = 0;
   np->mp_pages = num;
   return np;

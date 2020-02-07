@@ -263,29 +263,48 @@
 
 /*----------------------------------------------------------------------------*/
 
-#if defined(MDBX_USE_VALGRIND)
-#   include <valgrind/memcheck.h>
-#   ifndef VALGRIND_DISABLE_ADDR_ERROR_REPORTING_IN_RANGE
-        /* LY: available since Valgrind 3.10 */
-#       define VALGRIND_DISABLE_ADDR_ERROR_REPORTING_IN_RANGE(a,s)
-#       define VALGRIND_ENABLE_ADDR_ERROR_REPORTING_IN_RANGE(a,s)
-#   endif
-#elif !defined(RUNNING_ON_VALGRIND)
-#   define VALGRIND_CREATE_MEMPOOL(h,r,z)
-#   define VALGRIND_DESTROY_MEMPOOL(h)
-#   define VALGRIND_MEMPOOL_TRIM(h,a,s)
-#   define VALGRIND_MEMPOOL_ALLOC(h,a,s)
-#   define VALGRIND_MEMPOOL_FREE(h,a)
-#   define VALGRIND_MEMPOOL_CHANGE(h,a,b,s)
-#   define VALGRIND_MAKE_MEM_NOACCESS(a,s)
-#   define VALGRIND_MAKE_MEM_DEFINED(a,s)
-#   define VALGRIND_MAKE_MEM_UNDEFINED(a,s)
-#   define VALGRIND_DISABLE_ADDR_ERROR_REPORTING_IN_RANGE(a,s)
-#   define VALGRIND_ENABLE_ADDR_ERROR_REPORTING_IN_RANGE(a,s)
-#   define VALGRIND_CHECK_MEM_IS_ADDRESSABLE(a,s) (0)
-#   define VALGRIND_CHECK_MEM_IS_DEFINED(a,s) (0)
-#   define RUNNING_ON_VALGRIND (0)
-#endif /* MDBX_USE_VALGRIND */
+
+#include <valgrind/memcheck.h>
+#ifndef VALGRIND_DISABLE_ADDR_ERROR_REPORTING_IN_RANGE
+/* LY: available since Valgrind 3.10 */
+#define VALGRIND_DISABLE_ADDR_ERROR_REPORTING_IN_RANGE(a, s)
+#define VALGRIND_ENABLE_ADDR_ERROR_REPORTING_IN_RANGE(a, s)
+#endif
+
+#define xx_VALGRIND_MAKE_MEM_UNDEFINED(_qzz_addr, _qzz_len)                    \
+  VALGRIND_DO_CLIENT_REQUEST_EXPR(0 /* default return */,                      \
+                                  VG_USERREQ__MAKE_MEM_UNDEFINED, (_qzz_addr), \
+                                  (_qzz_len), 0, 0, 0)
+#undef MDBX_USE_VALGRIND
+#undef VALGRIND_CREATE_MEMPOOL
+#undef VALGRIND_DESTROY_MEMPOOL
+#undef VALGRIND_MEMPOOL_TRIM
+#undef VALGRIND_MEMPOOL_ALLOC
+#undef VALGRIND_MEMPOOL_FREE
+#undef VALGRIND_MEMPOOL_CHANGE
+#undef VALGRIND_MAKE_MEM_NOACCESS
+#undef VALGRIND_MAKE_MEM_DEFINED
+#undef VALGRIND_MAKE_MEM_UNDEFINED
+#undef VALGRIND_DISABLE_ADDR_ERROR_REPORTING_IN_RANGE
+#undef VALGRIND_ENABLE_ADDR_ERROR_REPORTING_IN_RANGE
+#undef VALGRIND_CHECK_MEM_IS_ADDRESSABLE
+#undef VALGRIND_CHECK_MEM_IS_DEFINED
+#undef RUNNING_ON_VALGRIND
+
+#define VALGRIND_CREATE_MEMPOOL(h,r,z) __noop()
+#define VALGRIND_DESTROY_MEMPOOL(h) __noop()
+#define VALGRIND_MEMPOOL_TRIM(h,a,s) __noop()
+#define VALGRIND_MEMPOOL_ALLOC(h,a,s) __noop()
+#define VALGRIND_MEMPOOL_FREE(h,a) __noop()
+#define VALGRIND_MEMPOOL_CHANGE(h,a,b,s) __noop()
+#define VALGRIND_MAKE_MEM_NOACCESS(a,s) __noop()
+#define VALGRIND_MAKE_MEM_DEFINED(a,s) __noop()
+#define VALGRIND_MAKE_MEM_UNDEFINED(a,s) __noop()
+#define VALGRIND_DISABLE_ADDR_ERROR_REPORTING_IN_RANGE(a,s) __noop()
+#define VALGRIND_ENABLE_ADDR_ERROR_REPORTING_IN_RANGE(a,s) __noop()
+#define VALGRIND_CHECK_MEM_IS_ADDRESSABLE(a,s) (0)
+#define VALGRIND_CHECK_MEM_IS_DEFINED(a,s) (0)
+#define RUNNING_ON_VALGRIND (0)
 
 #ifdef __SANITIZE_ADDRESS__
 #   include <sanitizer/asan_interface.h>
