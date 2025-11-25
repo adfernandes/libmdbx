@@ -86,6 +86,42 @@ __hot int tree_search(MDBX_cursor *mc, const MDBX_val *key, int flags) {
   return tree_search_finalize(mc, key, flags);
 }
 
+__hot __noinline size_t tree_search_branch(MDBX_cursor *mc, const MDBX_val *key) {
+  page_t *mp = mc->pg[mc->top];
+  cASSERT(mc, (page_type(mp) & P_TYPE) == P_BRANCH);
+  const size_t nkeys = page_numkeys(mp);
+  cASSERT(mc, nkeys >= 2);
+  DKBUF_DEBUG;
+  DEBUG("searching %zu keys in branch-page %" PRIaPGNO, nkeys, mp->pgno);
+
+  MDBX_cmp_func *comparator = mc->clc->k.cmp;
+  if (MDBX_UNALIGNED_OK < 4 && comparator == cmp_int_align2)
+    /* Branch pages have no data, so if using integer keys,
+     * alignment is guaranteed. Use faster cmp_int_align4(). */
+    comparator = cmp_int_align4;
+
+  if (unlikely(nkeys < 2))
+    return 0;
+
+  size_t lo = 1 /* mc->top != 0 */, size = nkeys - lo;
+  do {
+    const size_t half_floor = size >> 1;
+    const size_t half_ceil = (size + 1) >> 1;
+    const size_t it = lo + half_floor;
+    MDBX_val node_key = get_key(page_node(mp, it));
+    cASSERT(mc, ptr_disp(mp, mc->txn->env->ps) >= ptr_disp(node_key.iov_base, node_key.iov_len));
+    intptr_t cmp = comparator(&node_key, key);
+    DEBUG("search-step branch %zu [%s -> %" PRIaPGNO "], cmp %zi", it, DKEY_DEBUG(&node_key),
+          node_pgno(page_node(mp, it)), cmp);
+    if (cmp == 0)
+      return it;
+    cmp >>= CHAR_BIT * sizeof(cmp) - 1;
+    lo += half_ceil & cmp;
+    size -= half_ceil;
+  } while (size);
+  return lo - 1;
+}
+
 __hot __noinline int tree_search_finalize(MDBX_cursor *mc, const MDBX_val *key, int flags) {
   cASSERT(mc, !is_poor(mc));
   DKBUF_DEBUG;
@@ -98,9 +134,7 @@ __hot __noinline int tree_search_finalize(MDBX_cursor *mc, const MDBX_val *key, 
     DEBUG("found index 0 to page %" PRIaPGNO, node_pgno(page_node(mp, 0)));
 
     if ((flags & (Z_FIRST | Z_LAST)) == 0) {
-      const struct node_search_result nsr = node_search(mc, key);
-      if (likely(nsr.node))
-        ki = mc->ki[mc->top] + (intptr_t)nsr.exact - 1;
+      ki = tree_search_branch(mc, key);
       DEBUG("following index %zu for key [%s]", ki, DKEY_DEBUG(key));
     }
 

@@ -166,6 +166,8 @@ typedef enum page_type {
   P_SPILLED = 0x2000u /* spilled in parent txn */,
   P_LOOSE = 0x4000u /* page was dirtied then freed, can be reused */,
   P_FROZEN = 0x8000u /* used for retire page with known status */,
+  P_TYPE = (P_BRANCH | P_LEAF | P_LARGE | P_META | P_DUPFIX | P_SUBP),
+  P_FLAGS = (P_BAD | P_SPILLED | P_LOOSE | P_FROZEN),
   P_ILL_BITS = (uint16_t)~(P_BRANCH | P_LEAF | P_DUPFIX | P_LARGE | P_SPILLED),
 
   page_broken = 0,
