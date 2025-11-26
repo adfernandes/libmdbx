@@ -2,6 +2,7 @@
 TODO
 ----
 
+ - информация о размере рагруженной/кешируемой в ОЗУ части БД и её использование для управления readahead.
  - add optional page-get and operation statistics for cursors.
  - split ASSERT() to CHECK{0,1,2,3} and basal `assert()`.
  - [SWIG](https://www.swig.org/).
