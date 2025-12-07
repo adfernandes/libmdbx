@@ -5,7 +5,7 @@ libmdbx
 
 <!-- section-begin overview -->
 
-_libmdbx_ is an extremely fast, compact, powerful, embedded, transactional [key-value database](https://en.wikipedia.org/wiki/Key-value_database), with [Apache 2.0 license](https://gitflic.ru/project/erthink/libmdbx/blob?file=LICENSE). _libmdbx_ has a specific set of properties and capabilities, focused on creating unique lightweight solutions.
+_libmdbx_ is an extremely fast, compact, powerful, embedded, transactional [key-value database](https://en.wikipedia.org/wiki/Key-value_database), with [Apache 2.0 license](https://sourcecraft.dev/dqdkfa/libmdbx/blob?file=LICENSE). _libmdbx_ has a specific set of properties and capabilities, focused on creating unique lightweight solutions.
 
 1. Allows **a swarm of multi-threaded processes to [ACID](https://en.wikipedia.org/wiki/ACID)ly read and update** several key-value [maps](https://en.wikipedia.org/wiki/Associative_array) and [multimaps](https://en.wikipedia.org/wiki/Multimap) in a locally-shared database.
 
@@ -27,7 +27,7 @@ Historically, _libmdbx_ is a deeply revised and extended descendant of the legen
 
 [![Telergam: Support | Discussions | News](https://img.shields.io/endpoint?color=scarlet&logo=telegram&label=Support%20%7C%20Discussions%20%7C%20News&url=https%3A%2F%2Ftg.sumanjay.workers.dev%2Flibmdbx)](https://t.me/libmdbx)
 
-> Please refer to the online [official libmdbx documentation site](https://libmdbx.dqdkfa.ru) with [`C` API description](https://libmdbx.dqdkfa.ru/group__c__api.html) and pay attention to the [`C++` API](https://gitflic.ru/project/erthink/libmdbx/blob?file=mdbx.h%2B%2B#line-num-1). Donations are welcome to the Ethereum/ERC-20 `0xD104d8f8B2dC312aaD74899F83EBf3EEBDC1EA3A`.
+> Please refer to the online [official libmdbx documentation site](https://libmdbx.dqdkfa.ru) with [`C` API description](https://libmdbx.dqdkfa.ru/group__c__api.html) and pay attention to the [`C++` API](https://sourcecraft.dev/dqdkfa/libmdbx/blob?file=mdbx.h%2B%2B#line-num-1). Donations are welcome to the Ethereum/ERC-20 `0xD104d8f8B2dC312aaD74899F83EBf3EEBDC1EA3A`.
 > Всё будет хорошо!
 
 Telegram Group archive: [1](https://libmdbx.dqdkfa.ru/tg-archive/messages1.html), [2](https://libmdbx.dqdkfa.ru/tg-archive/messages2.html), [3](https://libmdbx.dqdkfa.ru/tg-archive/messages3.html), [4](https://libmdbx.dqdkfa.ru/tg-archive/messages4.html), [5](https://libmdbx.dqdkfa.ru/tg-archive/messages5.html), [6](https://libmdbx.dqdkfa.ru/tg-archive/messages6.html), [7](https://libmdbx.dqdkfa.ru/tg-archive/messages7.html).
@@ -281,9 +281,9 @@ Historically, _libmdbx_ is a deeply revised and extended descendant of the [Ligh
 
 Since 2017 _libmdbx_ is used in [Fast Positive Tables](https://gitflic.ru/project/erthink/libfpta), and until 2025 development was funded by [Positive Technologies](https://www.ptsecurity.com). Since 2020 _libmdbx_ is used in Ethereum: [Erigon](https://github.com/erigontech/erigon), [Akula](https://github.com/akula-bft/akula), [Silkworm](https://github.com/erigontech/silkworm), [Reth](https://github.com/paradigmxyz/reth), etc.
 
-On 2022-04-15 the Github administration, without any warning nor explanation, deleted _libmdbx_ along with a lot of other projects, simultaneously blocking access for many developers. Therefore on 2022-04-21 I have migrated to a reliable trusted infrastructure. The origin for now is at [GitFlic](https://gitflic.ru/project/erthink/libmdbx) with backup at [ABF by ROSA Лаб](https://abf.rosalinux.ru/erthink/libmdbx). For the same reason ~~Github~~ is blacklisted forever.
+On 2022-04-15 the Github administration, without any warning nor explanation, deleted _libmdbx_ along with a lot of other projects, simultaneously blocking access for many developers. Therefore on 2022-04-21 I have migrated to a reliable trusted infrastructure. The origin for now is at [SourceCraft](https://sourcecraft.dev/dqdkfa/libmdbx) with backup at [ABF by ROSA Лаб](https://abf.rosalinux.ru/erthink/libmdbx). For the same reason ~~Github~~ is blacklisted forever.
 
-Since May 2024 and version 0.13 _libmdbx_ was re-licensed under Apache-2.0 license. Please refer to the [`COPYRIGHT` file](https://gitflic.ru/project/erthink/libmdbx/blob/raw?file=COPYRIGHT) for license change explanations.
+Since May 2024 and version 0.13 _libmdbx_ was re-licensed under Apache-2.0 license. Please refer to the [`COPYRIGHT` file](https://sourcecraft.dev/dqdkfa/libmdbx/blob/raw?file=COPYRIGHT) for license change explanations.
 
 
 ## Acknowledgments
@@ -308,7 +308,7 @@ The source code is available on [SourceCraft](https://sourcecraft.dev/dqdkfa/lib
 
 _libmdbx_ provides three official ways for integration in source code form:
 
-1. Using an amalgamated source code which available in the [releases section](https://gitflic.ru/project/erthink/libmdbx/release) on GitFlic.
+1. Using an amalgamated source code which available in the [releases section](https://sourcecraft.dev/dqdkfa/libmdbx/release) on SourceCraft.
    > An amalgamated source code includes all files required to build and use _libmdbx_, but not for testing _libmdbx_ itself. Beside the releases an amalgamated sources could be created any time from the original clone of git repository on Linux by executing `make dist`. As a result, the desired set of files will be formed in the `dist` subdirectory.
 
 2. Using [Conan Package Manager](https://conan.io/):
@@ -317,7 +317,7 @@ _libmdbx_ provides three official ways for integration in source code form:
     - optional: Upload created recipe and/or package to the conan-server by `conan upload -r SERVER 'mdbx/*'`;
     - Consume libmdbx-package from the local conan-cache or from conan-server in accordance with the [Conan tutorial](https://docs.conan.io/2/tutorial/consuming_packages.html).
 
-3. Adding the complete source code as a `git submodule` from the [origin git repository](https://gitflic.ru/project/erthink/libmdbx) on GitFlic.
+3. Adding the complete source code as a `git submodule` from the [origin git repository](https://sourcecraft.dev/dqdkfa/libmdbx) on SourceCraft.
    > This allows you to build as _libmdbx_ and testing tool. On the other hand, this way requires you to pull git tags, and use C++11 compiler for test tool.
 
 _**Please, avoid using any other techniques.**_ Otherwise, at least don't ask for support and don't name such chimeras `libmdbx`.
@@ -336,11 +336,11 @@ So just using CMake or GNU Make in your habitual manner and feel free to fill an
 ### Testing
 The amalgamated source code does not contain any tests for or several reasons. Please read [the explanation](https://libmdbx.dqdkfa.ru/dead-github/issues/214#issuecomment-870717981) and don't ask to alter this. So for testing _libmdbx_ itself you need a full source code, i.e. the clone of a git repository, there is no option.
 
-The full source code of _libmdbx_ has a [`test` subdirectory](https://gitflic.ru/project/erthink/libmdbx/tree/master/test) with minimalistic test "framework". Actually yonder is a source code of the `mdbx_test` – console utility which has a set of command-line options that allow construct and run a reasonable enough test scenarios. This test utility is intended for _libmdbx_'s developers for testing library itself, but not for use by users. Therefore, only basic information is provided:
+The full source code of _libmdbx_ has a [`test` subdirectory](https://sourcecraft.dev/dqdkfa/libmdbx/tree/master/test) with minimalistic test "framework". Actually yonder is a source code of the `mdbx_test` – console utility which has a set of command-line options that allow construct and run a reasonable enough test scenarios. This test utility is intended for _libmdbx_'s developers for testing library itself, but not for use by users. Therefore, only basic information is provided:
 
    - There are few CRUD-based test cases (hill, TTL, nested, append, jitter, etc), which can be combined to test the concurrent operations within shared database in a multi-processes environment. This is the `basic` test scenario.
    - The `Makefile` provide several self-described targets for testing: `smoke`, `test`, `check`, `memcheck`, `test-valgrind`, `test-asan`, `test-leak`, `test-ubsan`, `cross-gcc`, `cross-qemu`, `gcc-analyzer`, `smoke-fault`, `smoke-singleprocess`, `test-singleprocess`, `long-test`. Please run `make --help` if doubt.
-   - In addition to the `mdbx_test` utility, there is the script [`stochastic.sh`](https://gitflic.ru/project/erthink/libmdbx/blob/master/test/stochastic.sh), which calls `mdbx_test` by going through set of modes and options, with gradually increasing the number of operations and the size of transactions. This script is used for mostly of all automatic testing, including `Makefile` targets and Continuous Integration.
+   - In addition to the `mdbx_test` utility, there is the script [`stochastic.sh`](https://sourcecraft.dev/dqdkfa/libmdbx/blob/master/test/stochastic.sh), which calls `mdbx_test` by going through set of modes and options, with gradually increasing the number of operations and the size of transactions. This script is used for mostly of all automatic testing, including `Makefile` targets and Continuous Integration.
    - Brief information of available command-line options is available by `--help`. However, you should dive into source code to get all, there is no option.
 
 Anyway, no matter how thoroughly the _libmdbx_ is tested, you should rely only on your own tests for a few reasons:
