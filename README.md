@@ -34,21 +34,39 @@ Telegram Group archive: [1](https://libmdbx.dqdkfa.ru/tg-archive/messages1.html)
 
 ## Github
 
-### на Русском (мой родной язык)
-
-Весной 2022, без каких-либо предупреждений или пояснений, администрация Github удалила мой аккаунт и все проекты. Через несколько месяцев, без какого-либо моего участия или уведомления, проекты были восстановлены/открыты в статусе "public read-only archive" из какой-то неполноценной резервной копии. Эти действия Github я расцениваю как злонамеренный саботаж, а сам сервис Github считаю навсегда утратившим какое-либо доверие.
-
-Вследствие произошедшего, никогда и ни при каких условиях, я не буду размещать на Github первоисточники (aka origins) моих проектов, либо как-либо полагаться на инфраструктуру Github.
-
-Тем не менее, понимая что пользователям моих проектов удобнее получать к ним доступ именно на Github, я не хочу ограничивать их свободу или создавать неудобство, и поэтому размещаю на Github зеркала (aka mirrors) репозиториев моих проектов. При этом ещё раз акцентирую внимание, что это только зеркала, которые могут быть заморожены, заблокированы или удалены в любой момент, как это уже было в 2022.
-
 ### in English
+
+This mirror on github is no longer being updated or used.
+The libmdbx project has been completely relocated to the jurisdiction of the Russian Federation.
+Please refer to https://libmdbx.dqdkfa.ru for documentation and https://sourcecraft.dev/dqdkfa/libmdbx for the source code (it is still open and provided with first-class free support).
+Regardless of anything else, I would like to thank [Erigon](https://erigon.tech/) once again for the sponsorship.
+
+##### Explanations
 
 In the spring of 2022, without any warnings or explanations, the Github administration deleted my account and all projects. A few months later, without any involvement or notification from me, the projects were restored/opened in the "public read-only archive" status from some kind of incomplete backup. I regard these actions of Github as malicious sabotage, and I consider the Github service itself to have lost any trust forever.
 
 As a result of what has happened, I will never, under any circumstances, post the primary sources (aka origins) of my projects on Github, or rely in any way on the Github infrastructure.
 
-Nevertheless, realizing that it is more convenient for users of my projects to access them on Github, I do not want to restrict their freedom or create inconvenience, and therefore I place mirrors of my project repositories on Github. At the same time, I would like to emphasize once again that these are only mirrors that can be frozen, blocked or deleted at any time, as was the case in 2022.
+Nonetheless, taking into account that it is more convenient for users of my projects to access them on Github, I did not want to restrict their freedom or create inconvenience, and therefore I posted mirrors on Github.
+However, it was noticed that despite the development of libmdbx, free support and consultations, many projects and users deviated from the rules of a fair deal and instead of helping and building relationships, they began to adjust links and delete references in violation of the license.
+Therefore, in protest against such unworthy actions, on December 10, 2025, I decided to abandon the placement of mirrors on Github.
+
+### на Русском (мой родной язык)
+
+Это зеркало на github больше не обновляется и не используется.
+Проект libmdbx полностью перемещен в юрисдикцию Российской Федерации.
+Пожалуйста обращайтесь на https://libmdbx.dqdkfa.ru за документацией и на https://sourcecraft.dev/dqdkfa/libmdbx за исходным кодом (он по-прежнему открыт и обеспечен первоклассной бесплатной поддержкой).
+Вне зависимости от прочего хочу ещё раз поблагодарить [Erigon](https://erigon.tech/) за спонсорскую помощь.
+
+##### Пояснения
+
+Весной 2022, без каких-либо предупреждений или пояснений, администрация Github удалила мой аккаунт и все проекты. Через несколько месяцев, без какого-либо моего участия или уведомления, проекты были восстановлены/открыты в статусе "public read-only archive" из какой-то неполноценной резервной копии. Эти действия Github я расцениваю как злонамеренный саботаж, а сам сервис Github считаю навсегда утратившим какое-либо доверие.
+
+Вследствие произошедшего, никогда и ни при каких условиях, я не буду размещать на Github первоисточники (aka origins) моих проектов, либо как-либо полагаться на инфраструктуру Github.
+
+Тем не менее, принимая во внимание что пользователям моих проектов удобнее получать к ним доступ именно на Github, я не хотел ограничивать их свободу или создавать неудобство, и поэтому размещал зеркала на Github.
+Однако, было замечено, что несмотря на развитие libmdbx, бесплатную поддержку и консультации, многие проекты и пользователи отошли от правил честной сделки и вместо помощи и налаживания отношений стали корректировать ссылки и удалять упоминания в нарушение лицензии.
+Поэтому в знак протеста таким действиям, 10 декабря 2025 года я решил отказаться от размещения зеркал на Github.
 
 ## MithrilDB and Future
 
@@ -302,7 +320,7 @@ Usage
 
 Currently, libmdbx is only available in a [source code](https://en.wikipedia.org/wiki/Source_code) form. Packages support for common Linux distributions is planned in the future, since release the version `1.0`.
 
-The source code is available on [SourceCraft](https://sourcecraft.dev/dqdkfa/libmdbx) and mirrors on [abf.io](https://abf.io/erthink/libmdbx), [hub.mos.ru](https://hub.mos.ru/leo/libmdbx), [Gitflic](https://gitflic.ru/project/erthink/libmdbx) and [Github](https://github.com/erthink/libmdbx). Please use the `stable` branch or the latest release for production environment through stagging and the `master` branch for development a derivative projects.
+The source code is available on [SourceCraft](https://sourcecraft.dev/dqdkfa/libmdbx) and mirrors on [abf.io](https://abf.io/erthink/libmdbx) and [Gitflic](https://gitflic.ru/project/erthink/libmdbx). Please use the `stable` branch or the latest release for production environment through stagging and the `master` branch for development a derivative projects.
 
 ## Source code embedding
 
@@ -465,7 +483,7 @@ Performance comparison
 
 Over the past 10 years, _libmdbx_ has had a lot of significant improvements and innovations. _libmdbx_ has become a slightly faster in simple cases and many times faster in complex scenarios, especially with a huge transactions in gigantic databases. Therefore, on the one hand, the results below are outdated. However, on the other hand, these simple benchmarks are evident, easy to reproduce, and are close to the most common use cases.
 
-The following all benchmark illustrative results were obtained in 2015 by [IOArena](https://abf.io/erthink/ioarena) and multiple [scripts](https://github.com/pmwkaa/ioarena/tree/HL%2B%2B2015) runs on my laptop (i7-4600U 2.1 GHz, SSD MZNTD512HAGL-000L1).
+The following all benchmark illustrative results were obtained in 2015 by [IOArena](https://sourcecraft.dev/dqdkfa/ioarena) and multiple [scripts](https://github.com/pmwkaa/ioarena/tree/HL%2B%2B2015) runs on my laptop (i7-4600U 2.1 GHz, SSD MZNTD512HAGL-000L1).
 
 ## Integral performance
 
