@@ -36,8 +36,7 @@ Telegram Group archive: [1](https://libmdbx.dqdkfa.ru/tg-archive/messages1.html)
 
 ### in English
 
-This mirror on github is no longer being updated or used.
-The libmdbx project has been completely relocated to the jurisdiction of the Russian Federation.
+This mirror on github is no longer being updated or used. The libmdbx project has been completely relocated to the jurisdiction of the Russian Federation.
 Please refer to https://libmdbx.dqdkfa.ru for documentation and https://sourcecraft.dev/dqdkfa/libmdbx for the source code (it is still open and provided with first-class free support).
 Regardless of anything else, I would like to thank [Erigon](https://erigon.tech/) once again for the sponsorship.
 
@@ -53,8 +52,7 @@ Therefore, in protest against such unworthy actions, on December 10, 2025, I dec
 
 ### на Русском (мой родной язык)
 
-Это зеркало на github больше не обновляется и не используется.
-Проект libmdbx полностью перемещен в юрисдикцию Российской Федерации.
+Это зеркало на github больше не обновляется и не используется. Проект libmdbx полностью перемещен в юрисдикцию Российской Федерации.
 Пожалуйста обращайтесь на https://libmdbx.dqdkfa.ru за документацией и на https://sourcecraft.dev/dqdkfa/libmdbx за исходным кодом (он по-прежнему открыт и обеспечен первоклассной бесплатной поддержкой).
 Вне зависимости от прочего хочу ещё раз поблагодарить [Erigon](https://erigon.tech/) за спонсорскую помощь.
 
