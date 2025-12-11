@@ -137,3 +137,30 @@ int tbl_refresh(MDBX_txn *txn, size_t dbi) {
   txn->dbi_state[dbi] &= ~DBI_STALE;
   return MDBX_SUCCESS;
 }
+
+int tbl_purge(MDBX_cursor *mc) {
+  if (mc->tree->height) {
+    int err = tree_drop(mc, cursor_is_main(mc) || (mc->tree->flags & MDBX_DUPSORT));
+    if (unlikely(err != MDBX_SUCCESS))
+      return err;
+
+    /* reset the DB record, mark it dirty */
+    *mc->dbi_state |= DBI_DIRTY;
+    mc->tree->height = 0;
+    mc->tree->branch_pages = 0;
+    mc->tree->leaf_pages = 0;
+    mc->tree->large_pages = 0;
+    mc->tree->items = 0;
+    mc->tree->root = P_INVALID;
+    mc->tree->sequence = 0;
+    /* mc->tree->mod_txnid = txn->txnid; */
+    mc->txn->flags |= MDBX_TXN_DIRTY;
+
+    /* Invalidate the dropped DB's cursors */
+    const size_t dbi = cursor_dbi(mc);
+    for (mc = mc->txn->cursors[dbi]; mc; mc = mc->next)
+      be_poor(mc);
+  }
+
+  return MDBX_SUCCESS;
+}

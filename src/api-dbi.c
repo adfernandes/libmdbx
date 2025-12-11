@@ -44,33 +44,12 @@ __cold int mdbx_drop(MDBX_txn *txn, MDBX_dbi dbi, bool del) {
   if (unlikely(rc != MDBX_SUCCESS))
     return LOG_IFERR(rc);
 
-  if (txn->dbs[dbi].height) {
-    cx.outer.next = txn->cursors[dbi];
-    txn->cursors[dbi] = &cx.outer;
-    rc = tree_drop(&cx.outer, dbi == MAIN_DBI || (cx.outer.tree->flags & MDBX_DUPSORT));
-    txn->cursors[dbi] = cx.outer.next;
-    if (unlikely(rc != MDBX_SUCCESS))
-      return LOG_IFERR(rc);
-  }
+  rc = tbl_purge(&cx.outer);
+  if (unlikely(rc != MDBX_SUCCESS))
+    return LOG_IFERR(rc);
 
-  /* Invalidate the dropped DB's cursors */
-  for (MDBX_cursor *mc = txn->cursors[dbi]; mc; mc = mc->next)
-    be_poor(mc);
-
-  if (!del || dbi < CORE_DBS) {
-    /* reset the DB record, mark it dirty */
-    txn->dbi_state[dbi] |= DBI_DIRTY;
-    txn->dbs[dbi].height = 0;
-    txn->dbs[dbi].branch_pages = 0;
-    txn->dbs[dbi].leaf_pages = 0;
-    txn->dbs[dbi].large_pages = 0;
-    txn->dbs[dbi].items = 0;
-    txn->dbs[dbi].root = P_INVALID;
-    txn->dbs[dbi].sequence = 0;
-    /* txn->dbs[dbi].mod_txnid = txn->txnid; */
-    txn->flags |= MDBX_TXN_DIRTY;
+  if (!del || dbi < CORE_DBS)
     return MDBX_SUCCESS;
-  }
 
   MDBX_env *const env = txn->env;
   MDBX_val name = env->kvs[dbi].name;

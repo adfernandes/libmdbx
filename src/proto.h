@@ -115,6 +115,7 @@ MDBX_INTERNAL int __must_check_result tbl_create(MDBX_txn *txn, MDBX_cursor *mc,
                                                  unsigned db_flags);
 MDBX_INTERNAL int __must_check_result tbl_setup(const MDBX_env *env, volatile kvx_t *const kvx, const tree_t *const db);
 MDBX_INTERNAL int __must_check_result tbl_refresh(MDBX_txn *txn, size_t dbi);
+MDBX_INTERNAL int __must_check_result tbl_purge(MDBX_cursor *mc);
 
 /* coherency.c */
 MDBX_INTERNAL bool coherency_check_meta(const MDBX_env *env, const volatile meta_t *meta, bool report);
