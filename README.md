@@ -1,5 +1,3 @@
-<!-- Required extensions: pymdownx.betterem, pymdownx.tilde, pymdownx.emoji, pymdownx.tasklist, pymdownx.superfences -->
-
 libmdbx
 =======
 
@@ -36,7 +34,7 @@ Telegram Group archive: [1](https://libmdbx.dqdkfa.ru/tg-archive/messages1.html)
 
 ### in English
 
-This mirror on github is no longer being updated or used. The libmdbx project has been completely relocated to the jurisdiction of the Russian Federation.
+The mirror on github is no longer being updated or used. The _libmdbx_ project has been completely relocated to the jurisdiction of the Russian Federation.
 Please refer to https://libmdbx.dqdkfa.ru for documentation and https://sourcecraft.dev/dqdkfa/libmdbx for the source code (it is still open and provided with first-class free support).
 Regardless of anything else, I would like to thank [Erigon](https://erigon.tech/) once again for the sponsorship.
 
@@ -47,12 +45,12 @@ In the spring of 2022, without any warnings or explanations, the Github administ
 As a result of what has happened, I will never, under any circumstances, post the primary sources (aka origins) of my projects on Github, or rely in any way on the Github infrastructure.
 
 Nonetheless, taking into account that it is more convenient for users of my projects to access them on Github, I did not want to restrict their freedom or create inconvenience, and therefore I posted mirrors on Github.
-However, it was noticed that despite the development of libmdbx, free support and consultations, many projects and users deviated from the rules of a fair deal and instead of helping and building relationships, they began to adjust links and delete references in violation of the license.
+However, it was noticed that despite the development of _libmdbx_, free support and consultations, many projects and users deviated from the rules of a fair deal and instead of helping and building relationships, they began to adjust links and delete references in violation of the license.
 Therefore, in protest against such unworthy actions, on December 10, 2025, I decided to abandon the placement of mirrors on Github.
 
 ### на Русском (мой родной язык)
 
-Это зеркало на github больше не обновляется и не используется. Проект libmdbx полностью перемещен в юрисдикцию Российской Федерации.
+Зеркало на github больше не обновляется и не используется. Проект _libmdbx_ полностью перемещен в юрисдикцию Российской Федерации.
 Пожалуйста обращайтесь на https://libmdbx.dqdkfa.ru за документацией и на https://sourcecraft.dev/dqdkfa/libmdbx за исходным кодом (он по-прежнему открыт и обеспечен первоклассной бесплатной поддержкой).
 Вне зависимости от прочего хочу ещё раз поблагодарить [Erigon](https://erigon.tech/) за спонсорскую помощь.
 
@@ -63,7 +61,7 @@ Therefore, in protest against such unworthy actions, on December 10, 2025, I dec
 Вследствие произошедшего, никогда и ни при каких условиях, я не буду размещать на Github первоисточники (aka origins) моих проектов, либо как-либо полагаться на инфраструктуру Github.
 
 Тем не менее, принимая во внимание что пользователям моих проектов удобнее получать к ним доступ именно на Github, я не хотел ограничивать их свободу или создавать неудобство, и поэтому размещал зеркала на Github.
-Однако, было замечено, что несмотря на развитие libmdbx, бесплатную поддержку и консультации, многие проекты и пользователи отошли от правил честной сделки и вместо помощи и налаживания отношений стали корректировать ссылки и удалять упоминания в нарушение лицензии.
+Однако, было замечено, что несмотря на развитие _libmdbx_, бесплатную поддержку и консультации, многие проекты и пользователи отошли от правил честной сделки и вместо помощи и налаживания отношений стали корректировать ссылки и удалять упоминания в нарушение лицензии.
 Поэтому в знак протеста таким действиям, 10 декабря 2025 года я решил отказаться от размещения зеркал на Github.
 
 ## MithrilDB and Future

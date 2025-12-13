@@ -1,5 +1,3 @@
-
-
 ## v0.11.14 "Sergey Kapitsa" at 2023-02-14
 
 The stable bugfix release in memory of [Sergey Kapitsa](https://en.wikipedia.org/wiki/Sergey_Kapitsa) on his 95th birthday.
@@ -1063,5 +1061,3 @@ Deprecated functions and flags:
  - Nested transactions.
  - API description.
  - Checking for non-local filesystems to avoid DB corruption.
-
-
