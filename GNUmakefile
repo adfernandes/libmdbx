@@ -279,7 +279,7 @@ clean:
 	@echo '  REMOVE ...'
 	$(QUIET)rm -rf $(MDBX_TOOLS) mdbx_test @* *.[ao] *.[ls]o *.$(SO_SUFFIX) *.dSYM *~ tmp.db/* \
 		*.gcov *.log *.err src/*.o test/*.o mdbx_example dist @dist-check \
-		config.h src/config.h src/version.c *.tar* @buildflags.tag @dist-checked.tag \
+		config-gnumake.h src/config-gnumake.h src/version.c *.tar* @buildflags.tag @dist-checked.tag \
 		mdbx_*.static mdbx_*.static-lto CMakeFiles
 
 MDBX_BUILD_FLAGS =$(strip MDBX_BUILD_CXX=$(MDBX_BUILD_CXX) $(MDBX_BUILD_OPTIONS) $(call select_by,MDBX_BUILD_CXX,$(CXXFLAGS) $(LDFLAGS) $(LIB_STDCXXFS) $(LIBS),$(CFLAGS) $(LDFLAGS) $(LIBS)))
@@ -321,7 +321,7 @@ ifeq ($(wildcard mdbx.c),mdbx.c)
 # Amalgamated source code, i.e. distributed after `make dist`
 MAN_SRCDIR := man1/
 
-config.h: @buildflags.tag $(WAIT) mdbx.c $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
+config-gnumake.h: @buildflags.tag $(WAIT) mdbx.c $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
 	@echo '  MAKE $@'
 	$(QUIET)(echo '#define MDBX_BUILD_TIMESTAMP "$(MDBX_BUILD_TIMESTAMP)"' \
 	&& echo "#define MDBX_BUILD_FLAGS \"$$(cat @buildflags.tag)\"" \
@@ -331,33 +331,33 @@ config.h: @buildflags.tag $(WAIT) mdbx.c $(lastword $(MAKEFILE_LIST)) LICENSE NO
 	&& echo '#define MDBX_BUILD_METADATA "$(MDBX_BUILD_METADATA)"' \
 	) >$@
 
-mdbx-dylib.o: config.h mdbx.c mdbx.h $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
+mdbx-dylib.o: config-gnumake.h mdbx.c mdbx.h $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
 	@echo '  CC $@'
-	$(QUIET)$(CC) $(CFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config.h"' -DLIBMDBX_EXPORTS=1 -c mdbx.c -o $@
+	$(QUIET)$(CC) $(CFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config-gnumake.h"' -DLIBMDBX_EXPORTS=1 -c mdbx.c -o $@
 
-mdbx-static.o: config.h mdbx.c mdbx.h $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
+mdbx-static.o: config-gnumake.h mdbx.c mdbx.h $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
 	@echo '  CC $@'
-	$(QUIET)$(CC) $(CFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config.h"' -ULIBMDBX_EXPORTS -c mdbx.c -o $@
+	$(QUIET)$(CC) $(CFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config-gnumake.h"' -ULIBMDBX_EXPORTS -c mdbx.c -o $@
 
-mdbx++-dylib.o: config.h mdbx.c++ mdbx.h mdbx.h++ $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
+mdbx++-dylib.o: config-gnumake.h mdbx.c++ mdbx.h mdbx.h++ $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
 	@echo '  CC $@'
-	$(QUIET)$(CXX) $(CXXFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config.h"' -DLIBMDBX_EXPORTS=1 -c mdbx.c++ -o $@
+	$(QUIET)$(CXX) $(CXXFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config-gnumake.h"' -DLIBMDBX_EXPORTS=1 -c mdbx.c++ -o $@
 
-mdbx++-static.o: config.h mdbx.c++ mdbx.h mdbx.h++ $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
+mdbx++-static.o: config-gnumake.h mdbx.c++ mdbx.h mdbx.h++ $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
 	@echo '  CC $@'
-	$(QUIET)$(CXX) $(CXXFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config.h"' -ULIBMDBX_EXPORTS -c mdbx.c++ -o $@
+	$(QUIET)$(CXX) $(CXXFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config-gnumake.h"' -ULIBMDBX_EXPORTS -c mdbx.c++ -o $@
 
 mdbx_%:	mdbx_%.c mdbx-static.o
 	@echo '  CC+LD $@'
-	$(QUIET)$(CC) $(CFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config.h"' $^ $(EXE_LDFLAGS) $(LIBS) -o $@
+	$(QUIET)$(CC) $(CFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config-gnumake.h"' $^ $(EXE_LDFLAGS) $(LIBS) -o $@
 
 mdbx_%.static: mdbx_%.c mdbx-static.o
 	@echo '  CC+LD $@'
-	$(QUIET)$(CC) $(CFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config.h"' $^ $(EXE_LDFLAGS) -static -Wl,--strip-all -o $@
+	$(QUIET)$(CC) $(CFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config-gnumake.h"' $^ $(EXE_LDFLAGS) -static -Wl,--strip-all -o $@
 
-mdbx_%.static-lto: mdbx_%.c config.h mdbx.c mdbx.h
+mdbx_%.static-lto: mdbx_%.c config-gnumake.h mdbx.c mdbx.h
 	@echo '  CC+LD $@'
-	$(QUIET)$(CC) $(CFLAGS) -Os -flto $(MDBX_BUILD_OPTIONS) '-DLIBMDBX_API=' '-DMDBX_CONFIG_H="config.h"' \
+	$(QUIET)$(CC) $(CFLAGS) -Os -flto $(MDBX_BUILD_OPTIONS) '-DLIBMDBX_API=' '-DMDBX_CONFIG_H="config-gnumake.h"' \
 		$< mdbx.c $(EXE_LDFLAGS) $(LIBS) -static -Wl,--strip-all -o $@
 
 #> dist-cutoff-begin
@@ -546,15 +546,15 @@ $(foreach file,$(TEST_SRC),$(eval $(call test-rule,$(file))))
 define tool-rule
 mdbx_$(1):	src/tools/$(1).c libmdbx.a
 	@echo '  CC+LD $$@'
-	$(QUIET)$$(CC) $$(CFLAGS) $$(MDBX_BUILD_OPTIONS) -Isrc '-DMDBX_CONFIG_H="config.h"' $$^ $$(EXE_LDFLAGS) $$(LIBS) -o $$@
+	$(QUIET)$$(CC) $$(CFLAGS) $$(MDBX_BUILD_OPTIONS) -Isrc '-DMDBX_CONFIG_H="config-gnumake.h"' $$^ $$(EXE_LDFLAGS) $$(LIBS) -o $$@
 
 mdbx_$(1).static:	src/tools/$(1).c mdbx-static.o
 	@echo '  CC+LD $$@'
-	$(QUIET)$$(CC) $$(CFLAGS) $$(MDBX_BUILD_OPTIONS) -Isrc '-DMDBX_CONFIG_H="config.h"' $$^ $$(EXE_LDFLAGS) $$(LIBS) -static -Wl,--strip-all -o $$@
+	$(QUIET)$$(CC) $$(CFLAGS) $$(MDBX_BUILD_OPTIONS) -Isrc '-DMDBX_CONFIG_H="config-gnumake.h"' $$^ $$(EXE_LDFLAGS) $$(LIBS) -static -Wl,--strip-all -o $$@
 
-mdbx_$(1).static-lto: src/tools/$(1).c src/config.h src/version.c src/alloy.c $(ALLOY_DEPS)
+mdbx_$(1).static-lto: src/tools/$(1).c src/config-gnumake.h src/version.c src/alloy.c $(ALLOY_DEPS)
 	@echo '  CC+LD $$@'
-	$(QUIET)$$(CC) $$(CFLAGS) -Os -flto $$(MDBX_BUILD_OPTIONS) -Isrc '-DLIBMDBX_API=' '-DMDBX_CONFIG_H="config.h"' \
+	$(QUIET)$$(CC) $$(CFLAGS) -Os -flto $$(MDBX_BUILD_OPTIONS) -Isrc '-DLIBMDBX_API=' '-DMDBX_CONFIG_H="config-gnumake.h"' \
 		$$< src/alloy.c $$(EXE_LDFLAGS) $$(LIBS) -static -Wl,--strip-all -o $$@
 
 endef
@@ -589,7 +589,7 @@ src/version.c: src/version.c.in $(lastword $(MAKEFILE_LIST)) $(MDBX_GIT_DIR)/HEA
 		-e "s|@MDBX_VERSION_PURE@|$(MDBX_VERSION_PURE)|" \
 	src/version.c.in >$@
 
-src/config.h: @buildflags.tag $(WAIT) src/version.c $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
+src/config-gnumake.h: @buildflags.tag $(WAIT) src/version.c $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
 	@echo '  MAKE $@'
 	$(QUIET)(echo '#define MDBX_BUILD_TIMESTAMP "$(MDBX_BUILD_TIMESTAMP)"' \
 	&& echo "#define MDBX_BUILD_FLAGS \"$$(cat @buildflags.tag)\"" \
@@ -600,13 +600,13 @@ src/config.h: @buildflags.tag $(WAIT) src/version.c $(lastword $(MAKEFILE_LIST))
 	&& echo '#define MDBX_BUILD_METADATA "$(MDBX_BUILD_METADATA)"' \
 	) >$@
 
-mdbx-dylib.o: src/config.h src/version.c src/alloy.c $(ALLOY_DEPS) $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
+mdbx-dylib.o: src/config-gnumake.h src/version.c src/alloy.c $(ALLOY_DEPS) $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
 	@echo '  CC $@'
-	$(QUIET)$(CC) $(CFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config.h"' -DLIBMDBX_EXPORTS=1 -c src/alloy.c -o $@
+	$(QUIET)$(CC) $(CFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config-gnumake.h"' -DLIBMDBX_EXPORTS=1 -c src/alloy.c -o $@
 
-mdbx-static.o: src/config.h src/version.c src/alloy.c $(ALLOY_DEPS) $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
+mdbx-static.o: src/config-gnumake.h src/version.c src/alloy.c $(ALLOY_DEPS) $(lastword $(MAKEFILE_LIST)) LICENSE NOTICE
 	@echo '  CC $@'
-	$(QUIET)$(CC) $(CFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config.h"' -ULIBMDBX_EXPORTS -c src/alloy.c -o $@
+	$(QUIET)$(CC) $(CFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config-gnumake.h"' -ULIBMDBX_EXPORTS -c src/alloy.c -o $@
 
 docs/Doxyfile: docs/Doxyfile.in src/version.c $(lastword $(MAKEFILE_LIST))
 	@echo '  MAKE $@'
@@ -655,13 +655,13 @@ doxygen: docs/Doxyfile docs/overall.md docs/intro.md docs/usage.md mdbx.h mdbx.h
 	$(SED) -i docs/html/index.html -e '/\/MathJax.js"><\/script>/r docs/ld+json' -e 's/<title>libmdbx: Overall<\/title>//;T;r docs/title' && \
 	$(SED) -i docs/html/sitemap.xml -e '/^\s*<\/urlset>/e cat docs/sitemap.add'
 
-mdbx++-dylib.o: src/config.h src/mdbx.c++ mdbx.h mdbx.h++ $(lastword $(MAKEFILE_LIST))
+mdbx++-dylib.o: src/config-gnumake.h src/mdbx.c++ mdbx.h mdbx.h++ $(lastword $(MAKEFILE_LIST))
 	@echo '  CC $@'
-	$(QUIET)$(CXX) $(CXXFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config.h"' -DLIBMDBX_EXPORTS=1 -c src/mdbx.c++ -o $@
+	$(QUIET)$(CXX) $(CXXFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config-gnumake.h"' -DLIBMDBX_EXPORTS=1 -c src/mdbx.c++ -o $@
 
-mdbx++-static.o: src/config.h src/mdbx.c++ mdbx.h mdbx.h++ $(lastword $(MAKEFILE_LIST))
+mdbx++-static.o: src/config-gnumake.h src/mdbx.c++ mdbx.h mdbx.h++ $(lastword $(MAKEFILE_LIST))
 	@echo '  CC $@'
-	$(QUIET)$(CXX) $(CXXFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config.h"' -ULIBMDBX_EXPORTS -c src/mdbx.c++ -o $@
+	$(QUIET)$(CXX) $(CXXFLAGS) $(MDBX_BUILD_OPTIONS) '-DMDBX_CONFIG_H="config-gnumake.h"' -ULIBMDBX_EXPORTS -c src/mdbx.c++ -o $@
 
 dist: tags $(WAIT) @dist-checked.tag libmdbx-sources-$(MDBX_VERSION_IDENT).tar.gz $(lastword $(MAKEFILE_LIST))
 	@echo '  AMALGAMATION is done'
