@@ -11,12 +11,12 @@
     "@type": "ListItem",
     "position": 2,
     "name": "Исходный код",
-    "url": "https://gitflic.ru/project/erthink/libmdbx"
+    "url": "https://sourcecraft.dev/dqdkfa/libmdbx"
   },{
     "@type": "ListItem",
     "position": 3,
-    "name": "C++ API",
-    "url": "https://libmdbx.dqdkfa.ru/group__cxx__api.html"
+    "name": "Homesite",
+    "url": "https://libmdbx.dqdkfa.ru/"
   },{
     "@type": "ListItem",
     "position": 4,
